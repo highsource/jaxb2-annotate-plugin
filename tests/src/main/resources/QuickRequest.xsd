@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Jim Hoover (Lockheed Martin) -->
+<xs:schema xmlns:qikreq="urn:us:gov:hhs:acf:qikreq" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cse="urn:us:gov:hhs:acf:cse" targetNamespace="urn:us:gov:hhs:acf:qikreq" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:us:gov:hhs:acf:cse" schemaLocation="cse.xsd"/>
+	<xs:element name="QuickRequest">
+		<xs:annotation>
+			<xs:documentation>This is the root for the Quick Request schema.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RequestIdentifierInfo">
+					<xs:annotation>
+						<xs:documentation>This complex component provides a logical grouping of elements associated with making a request.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="RequestDateTime" type="cse:RequestDateTimeType">
+								<xs:annotation>
+									<xs:documentation>The date/time that a request for information was made.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="CaseRequestedDataText" type="cse:CaseRequestedDataTextType">
+								<xs:annotation>
+									<xs:documentation>The type of data that is being requested. Selections include financial, activity, support order, participants, contact.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="SystemServerIdentifier" type="cse:SystemServerIdentifierType">
+								<xs:annotation>
+									<xs:documentation>An identifier that uniquely defines a Server Address within a network.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="SystemUserIdentifier" type="cse:SystemUserIdentifierType">
+								<xs:annotation>
+									<xs:documentation>An identifier that associates a user with access or authorization to a system.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="RequestIdentifier" type="cse:RequestIdentifierType"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="RequestedInfo" type="cse:RequestedInfoType">
+					<xs:annotation>
+						<xs:documentation>This complext component provides a logical grouping of elements related to a specific request for case information.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

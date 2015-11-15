@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Jim Hoover (Lockheed Martin) -->
+<xs:schema xmlns:idy="urn:us:gov:hhs:acf:idy" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cse="urn:us:gov:hhs:acf:cse" targetNamespace="urn:us:gov:hhs:acf:idy" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:us:gov:hhs:acf:cse" schemaLocation="cse.xsd"/>
+	<xs:element name="IdentifyingInfoRoot">
+		<xs:annotation>
+			<xs:documentation>This is the root element for the Case Indentifying Information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdentifyingInfo" type="cse:CaseIdentifyingInfoType">
+					<xs:annotation>
+						<xs:documentation>This complex component provides a logical grouping of  elements related to a case.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

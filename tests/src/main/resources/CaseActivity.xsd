@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 sp1 (http://www.altova.com) by Kevin McCarthy (LOCKHEED MARTIN) -->
+<xs:schema xmlns:csact="urn:us:gov:hhs:acf:csact" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cse="urn:us:gov:hhs:acf:cse" targetNamespace="urn:us:gov:hhs:acf:csact" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:us:gov:hhs:acf:cse" schemaLocation="cse.xsd"/>
+	<xs:annotation>
+		<xs:documentation>Case Activity Schema - Version 1.2  Update 12/17/2010</xs:documentation>
+	</xs:annotation>
+	<xs:element name="CaseActivityRoot">
+		<xs:annotation>
+			<xs:documentation>Case Activity Root</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Locate" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="NCPMailingAddress" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the date of the most recent mailing address for the NCP. For example, if your state obtained an address from a locate or other source, and was able to determine that the NCP receives mail at this address (e.g., mail verification, service of process), report this address. If you have a mailing address, but no associated date, provide the address. If the mailing and residential addresses are the same, provide both address. Do not report either a mailing or residential address that your state has determined is no longer "good" for the NCP, i.e., the NCP does not receive mail.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's mailing address is "/>
+										<xs:element name="Address" type="cse:QuickAddressType"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="NCPResidentialAddress" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the date of the most recent residential address for the NCP. For example, if your state obtained an address from a locate or other source, and was able to determine that the NCP receives mail at this address (e.g., mail verification, service of process), report this address. If you have a residential address, but no associated date, provide the address. If the mailing and residential addresses are the same, provide both address. Do not report either a mailing or residential address that your state has determined is no longer "good" for the NCP, i.e., the NCP does not reside therel.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="Address" type="cse:QuickAddressType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's residential address is "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="NCPIncarcerated" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the date the NCP was incarcerated. For example, if your state learned that an NCP was incarcerated on 01/12/1998 and obtained this information on 6/12/2006, report 01/12/1998 as the incarceration date. If you know the NCP is incarcerated, but do not know the date of incarceration, provide a “Y” indicator only.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Incarceration">
+											<xs:complexType>
+												<xs:choice>
+													<xs:element name="PersonIncarcerationDate" type="cse:PersonIncarcerationDateType"/>
+													<xs:element name="PersonIncarceratedIndicator" type="cse:PersonIncarceratedIndicatorType"/>
+												</xs:choice>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP Incarcerated."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="NCPIncarceratedReleased" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the date the NCP was or is expected to be released (a future date) from a correctional facility.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="PersonIncarceratedReleaseDate" type="cse:PersonIncarcerationReleasedDateType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP released, or expected to be released, from a correctional facility."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="NCPDied" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the date the NCP died. For example, if the NCP died on 04/23/2004 and your state obtained this information on 05/01/2005, report 04/23/2004 as the date of death. If you know the NCP died, but do not know the date of death provide a “Y” indicator only.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="DeathNotice">
+											<xs:complexType>
+												<xs:choice>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="PersonDiedIndicator" type="cse:PersonDiedIndicatorType">
+														<xs:annotation>
+															<xs:documentation>NCP Died Indicator = Y</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:choice>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP died."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="CPMailingAddress" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CPName" type="cse:PersonNameType"/>
+										<xs:element name="Address" type="cse:QuickAddressType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="CP's mailing address is "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="CPResidentialAddress" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CPName" type="cse:PersonNameType"/>
+										<xs:element name="Address" type="cse:QuickAddressType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="CP's residential address is "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Paternity" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="PaternityAcknowledgement" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Provide the date that the voluntary acknowledgement of paternity was signed. Also provide the names of the child or children for whom a voluntary acknowledgement of paternity was signed.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="ChildName" type="csact:PersonNameType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="A voluntary paternity acknowledgement was signed for "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="PaternityEstablishment" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Provide the date and the names of the child or children for whom paternity was established.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="ChildName" type="csact:PersonNameType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="Paternity was established for "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="PaternityNotEstablished" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Provide the date and the names of each child for whom paternity was not established.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="ChildName" type="csact:PersonNameType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="A determination was made that paternity could not be established for "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="OrderEstablishment" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ChildSupportOrderWithMedicalEstablished" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent effective date that a child support order required the NCP to pay a specified dollar amount and was also ordered to provide medical coverage.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityEffectiveDate"/>
+										<xs:element name="ChildName" type="csact:PersonNameType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="A child support order with medical support was effective for "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ChildSupportOrderEstablished" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent “effective” date that a child support order required the NCP to pay a specified dollar amount. Only report those support orders that do not require the NCP to provide medical coverage.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityEffectiveDate"/>
+										<xs:element name="ChildName" type="csact:PersonNameType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="A child support order was effective for "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="MedicalSupportOrderEstablished" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent effective date that an order for medical support required the NCP to provide only medical coverage. Only report those orders that required the NCP to provide medical coverage for his or her child or children and  did not include regular child support payments.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityEffectiveDate"/>
+										<xs:element name="ChildName" type="csact:PersonNameType"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="A medical support order was effective for "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="LastReviewAdjustment" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that a review and adjustment process, not a modification of an order, was completed.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="The most recent review and adjustment process was completed."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="LastModifiedChildSupportOrder" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that the child support order was modified.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="The most recent child support order was modified."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Enforcement" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ControllingOrderDetermination" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the date on which a controlling order determination, as defined in UIFSA 2001, was completed in your state.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="A controlling order determination was completed."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="IWOIssued" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that an income-withholding order (IWO) was generated and the name of the employer to which it was sent.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element ref="csact:EmployerName"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="An IWO was issued to "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="EmploymentStatus" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that an IWO was generated to an employer and the IWO was not successful, e.g., the NCP was no longer employed there, never employed there, etc. Also report the name of the employer.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element ref="csact:EmployerName"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="An IWO was issued to but could not be implemented at "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="NationalMedicalSupportNotice" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that a National Medical Support Notice (NMSN) was generated to the NCP’s employer.Also report the name of the employer.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element ref="csact:EmployerName"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="A National Medical Support Notice was issued to "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="DependentMedicalCoverage" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that your state determined that the NCP was providing medical support for his or her children. Do not report if someone other than the NCP is providing coverage.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="Medical coverage is provided by NCP for his or her dependents."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="CreditBureauUpdate" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>If the NCP is currently being reported to the credit bureaus, provide the most recent date that the NCP’s delinquency was submitted to the credit bureaus.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's information was submitted to the credit bureaus."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="StateTaxOffset" minOccurs="0">
+								<xs:complexType>
+									<xs:choice>
+										<xs:element name="EnforcementAvailable">
+											<xs:annotation>
+												<xs:documentation>Provide the most recent date that the NCP’s information was submitted, or the arrearage/delinquency was updated, to your state’s tax offset program. Only report this if the NCP’s information is currently submitted for your state’s tax refund offset program.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's information was submitted to the state tax refund offset process."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="EnforcementNotAvailable">
+											<xs:annotation>
+												<xs:documentation>Provide a Y indicator if your state does not have a state tax refund offset process.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:EnforcementNAIndicator"/>
+													<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="Does not have a state tax refund offset process."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="FederalTaxOffset" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that the NCP’s information was submitted, or the arrearage/delinquency was updated, to the Federal Tax Refund Offset Program.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's information was submitted to the Federal Tax Refund Offset program."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="PassportDenial" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that the NCP’s information was submitted to the Passport Denial Program.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's information was submitted to the Passport Denial Program."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="FinancialAccountSeizure" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that your state submitted the NCP’s information to a financial institution (include the name of the financial institution) to freeze and seize funds in the NCP’s account.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="FinancialInstitutionName" type="cse:FinancialInstitutionNameType"/>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's information was submitted for the purpose of seizing an account or funds at "/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="DriverLicenseSuspension" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that your state submitted the NCP’s information to the motor vehicle agency for driver’s license suspension. Only report this if the NCP's omfpr,atopm os currently submitted for the driver's suspension program in your state.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's information was submitted to the motor vehicle agency for driver's license suspension."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ProfessionalLicenseSuspension" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that the NCP’s information was submitted for a professional license suspension, e.g., electrician, beautician, etc. Only report this if the NCP's information is currently submitted fo the professional license suspension program in your state.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's information was submitted to a professional licensing agency for suspension of his or her license."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="LotteryInterceptRequest" minOccurs="0">
+								<xs:complexType>
+									<xs:choice>
+										<xs:element name="EnforcementAvailable">
+											<xs:annotation>
+												<xs:documentation>Provide the most recent date that the NCP’s information was submitted to your state’s lottery division to intercept his or her potential winnings. Only report this if the NCP’s information is currently submitted for the lottery intercept program in your state.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="NCP's information was submited to the lottery division for interception of winnings."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="EnforcementNotAvailable">
+											<xs:annotation>
+												<xs:documentation>Provide a Y if your state does not have a state lottery intercept program.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:EnforcementNAIndicator"/>
+													<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="Does not have a state lottery intercept program."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="LienFiled" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date that your state filed a lien against an NCP’s account, personal property, etc. This is not to be provided when an arrears (money) judgment is recorded.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="A lien was filed against NCP's personal or real property."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CaseStatus" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="OpenStatus" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provide the most recent date your state opened the case. For example, if your state received a referral from TANF to pursue child support, enter the date your state establishd the case on your state's child support system.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="csact:CaseActivityDate"/>
+										<xs:element name="CaseActivityStatement" type="cse:CaseActivityStatementType" fixed="The case was opened."/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="CloseStatus" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Provied the most recent date that your state closed the case. Also provide the reason, per CFR 303.11 (b 1-12), (b 14) and CFR 303.7 (d 9-10)</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:choice>
+										<xs:element name="ClosureReason1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(1) No longer a current support order."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason2">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(2) NCP or PF is deceased."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason3">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="CaseClosure" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(3) Paternity cannot be established."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason4">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(4) NCP's location is unknown."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason5">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(5) NCP cannot pay support for the duration of the child's minority."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason6">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(6) NCP is a citizen of, lives in, a foreign country."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason7">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(7) IV-D agency has provided location-only services."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason8">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(8) Non-IV-A recipient of services requests closure of a case."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason9">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(9) A finding by the responsible State agency of good cause."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason10">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(10) In a non-IV-A case, IV-D agency is unable to contact the recipient of services."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason11">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(11) In a non-IV-A case, IV-D agency documents noncooperation of the recipient of services."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason12">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed (45 CFR 303.11 (b)(12) IV-D agency documents failure by the initiating State to take an action."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason13">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed 45 CFR 303.7(d) (9) The initiating state directed closure because it issued a direct income withholding order."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason14">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed 45 CFR 303.7(d) (10) The initiating state advised that its case was closed."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ClosureReason15">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="csact:CaseActivityDate"/>
+													<xs:element name="ClosureReason" type="cse:ClosureReasonType" fixed="Case closed 45 CFR 303.11(b) (14) Intergovernmental services are no longer needed by the initiating state."/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaseActivityDate" type="cse:CaseActivityDateType">
+		<xs:annotation>
+			<xs:documentation>Case Activity Date</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CaseActivityEffectiveDate" type="cse:CaseActivityEffectiveDateType">
+		<xs:annotation>
+			<xs:documentation>Case Activity Effective Date</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EmployerName" type="cse:EmployerNameType">
+		<xs:annotation>
+			<xs:documentation>Employer Name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EnforcementNAIndicator" type="cse:EnforcementNAIndicatorType">
+		<xs:annotation>
+			<xs:documentation>Enforcement Not Available Indicator</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PersonNameType">
+		<xs:annotation>
+			<xs:documentation>Elements that provide a full name for a person.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PersonSurName" type="cse:PersonSurNameType"/>
+			<xs:element name="PersonGivenName" type="cse:PersonGivenNameType"/>
+			<xs:element name="PersonMiddleName" type="cse:PersonMiddleNameType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

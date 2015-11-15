@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ 
+  Web-service description for the CA,CI,CP and FN Retriever service.
+  Retrieve info for a child-support enforcement case.
+ -->
+<wsdl:definitions xmlns:infw="http://www.ocse.gov/jit/wsdl/CARetriever.wsdl"
+                  xmlns:infx="http://www.ocse.gov/jit/wsdl/CARetriever.xsd"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  targetNamespace="http://www.ocse.gov/jit/wsdl/CARetriever.wsdl"
+                  xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/   http://schemas.xmlsoap.org/wsdl/"
+                  name="CARetriever">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.ocse.gov/jit/wsdl/CARetriever.xsd"
+                    xmlns:qikreq="urn:us:gov:hhs:acf:qikreq" xmlns:qikrsp="urn:us:gov:hhs:acf:qikrsp"
+                    xmlns:ca="urn:us:gov:hhs:acf:ca" xmlns:cis="urn:us:gov:hhs:acf:cis" xmlns:cp="urn:us:gov:hhs:acf:cp"
+                    xmlns:fn="urn:us:gov:hhs:acf:fn" xmlns:chdr="urn:us:gov:hhs:acf:chdr"
+                    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="urn:us:gov:hhs:acf:qikreq" schemaLocation="QuickRequest.xsd"/>
+            <xsd:import namespace="urn:us:gov:hhs:acf:qikrsp" schemaLocation="QuickResponse.xsd"/>
+            <xsd:import namespace="urn:us:gov:hhs:acf:ca" schemaLocation="CASchema.xsd"/>
+            <xsd:import namespace="urn:us:gov:hhs:acf:cis" schemaLocation="CISchema.xsd"/>
+            <xsd:import namespace="urn:us:gov:hhs:acf:cp" schemaLocation="CPSchema.xsd"/>
+            <xsd:import namespace="urn:us:gov:hhs:acf:fn" schemaLocation="FNSchema.xsd"/>
+            <xsd:import namespace="urn:us:gov:hhs:acf:chdr" schemaLocation="CaseParticipantHeader.xsd"/>
+
+            <xsd:complexType name="CARetrieveInfoReply">
+                <xsd:sequence>
+                    <xsd:element ref="qikrsp:QuickResponse"/>
+                    <xsd:element ref="ca:CAInfo"/>
+                    <xsd:element ref="chdr:CaseParticipantHeader"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="CIRetrieveInfoReply">
+                <xsd:sequence>
+                    <xsd:element ref="qikrsp:QuickResponse"/>
+                    <xsd:element ref="cis:CIInfo"/>
+                    <xsd:element ref="chdr:CaseParticipantHeader"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="CPRetrieveInfoReply">
+                <xsd:sequence>
+                    <xsd:element ref="qikrsp:QuickResponse"/>
+                    <xsd:element ref="cp:CPInfo"/>
+                    <xsd:element ref="chdr:CaseParticipantHeader"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="FNRetrieveInfoReply">
+                <xsd:sequence>
+                    <xsd:element ref="qikrsp:QuickResponse"/>
+                    <xsd:element ref="fn:FNInfo"/>
+                    <xsd:element ref="chdr:CaseParticipantHeader"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="CAretrieveInfoReply" type="infx:CARetrieveInfoReply"/>
+            <xsd:complexType name="CARetrieveInfoResponse">
+                <xsd:sequence>
+                    <xsd:element ref="infx:CAretrieveInfoReply"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="CAretrieveInfoResponse" type="infx:CARetrieveInfoResponse"/>
+            <xsd:element name="CIretrieveInfoReply" type="infx:CIRetrieveInfoReply"/>
+            <xsd:complexType name="CIRetrieveInfoResponse">
+                <xsd:sequence>
+                    <xsd:element ref="infx:CIretrieveInfoReply"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="CIretrieveInfoResponse" type="infx:CIRetrieveInfoResponse"/>
+            <xsd:element name="CPretrieveInfoReply" type="infx:CPRetrieveInfoReply"/>
+            <xsd:complexType name="CPRetrieveInfoResponse">
+                <xsd:sequence>
+                    <xsd:element ref="infx:CPretrieveInfoReply"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="CPretrieveInfoResponse" type="infx:CPRetrieveInfoResponse"/>
+            <xsd:element name="FNretrieveInfoReply" type="infx:FNRetrieveInfoReply"/>
+            <xsd:complexType name="FNRetrieveInfoResponse">
+                <xsd:sequence>
+                    <xsd:element ref="infx:FNretrieveInfoReply"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="FNretrieveInfoResponse" type="infx:FNRetrieveInfoResponse"/>
+            <xsd:complexType name="RetrieverFault">
+                <xsd:sequence>
+                    <xsd:element name="info" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="CAretrieverFault" type="infx:RetrieverFault"/>
+            <xsd:element name="CIretrieverFault" type="infx:RetrieverFault"/>
+            <xsd:element name="CPretrieverFault" type="infx:RetrieverFault"/>
+            <xsd:element name="FNretrieverFault" type="infx:RetrieverFault"/>
+
+
+            <xsd:complexType name="RetrieveInfoRequest">
+                <xsd:sequence>
+                    <xsd:element ref="qikreq:QuickRequest"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+
+            <xsd:element name="caRetrieveInfo">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="riRequest" type="infx:RetrieveInfoRequest"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ciRetrieveInfo">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="riRequest" type="infx:RetrieveInfoRequest"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="cpRetrieveInfo">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="riRequest" type="infx:RetrieveInfoRequest"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="fnRetrieveInfo">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="riRequest" type="infx:RetrieveInfoRequest"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="caRetrieveInfoIn">
+        <wsdl:part name="in" element="infx:caRetrieveInfo"/>
+    </wsdl:message>
+    <wsdl:message name="ciRetrieveInfoIn">
+        <wsdl:part name="in" element="infx:ciRetrieveInfo"/>
+    </wsdl:message>
+    <wsdl:message name="cpRetrieveInfoIn">
+        <wsdl:part name="in" element="infx:cpRetrieveInfo"/>
+    </wsdl:message>
+    <wsdl:message name="fnRetrieveInfoIn">
+        <wsdl:part name="in" element="infx:fnRetrieveInfo"/>
+    </wsdl:message>
+    <wsdl:message name="CAretrieveInfoOut">
+        <wsdl:part name="CAout" element="infx:CAretrieveInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CIretrieveInfoOut">
+        <wsdl:part name="CIout" element="infx:CIretrieveInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CPretrieveInfoOut">
+        <wsdl:part name="CPout" element="infx:CPretrieveInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="FNretrieveInfoOut">
+        <wsdl:part name="FNout" element="infx:FNretrieveInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CAretrieverFault">
+        <wsdl:part name="CAfault" element="infx:CAretrieverFault"/>
+    </wsdl:message>
+    <wsdl:message name="CIretrieverFault">
+        <wsdl:part name="CIfault" element="infx:CIretrieverFault"/>
+    </wsdl:message>
+    <wsdl:message name="CPretrieverFault">
+        <wsdl:part name="CPfault" element="infx:CPretrieverFault"/>
+    </wsdl:message>
+    <wsdl:message name="FNretrieverFault">
+        <wsdl:part name="FNfault" element="infx:FNretrieverFault"/>
+    </wsdl:message>
+    <wsdl:portType name="CARetriever">
+
+        <wsdl:operation name="caRetrieveInfo">
+            <wsdl:input message="infw:caRetrieveInfoIn"/>
+            <wsdl:output message="infw:CAretrieveInfoOut"/>
+            <wsdl:fault name="fault" message="infw:CAretrieverFault"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="ciRetrieveInfo">
+            <wsdl:input message="infw:ciRetrieveInfoIn"/>
+            <wsdl:output message="infw:CIretrieveInfoOut"/>
+            <wsdl:fault name="fault" message="infw:CIretrieverFault"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="cpRetrieveInfo">
+            <wsdl:input message="infw:cpRetrieveInfoIn"/>
+            <wsdl:output message="infw:CPretrieveInfoOut"/>
+            <wsdl:fault name="fault" message="infw:CPretrieverFault"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="fnRetrieveInfo">
+            <wsdl:input message="infw:fnRetrieveInfoIn"/>
+            <wsdl:output message="infw:FNretrieveInfoOut"/>
+            <wsdl:fault name="fault" message="infw:FNretrieverFault"/>
+        </wsdl:operation>
+
+    </wsdl:portType>
+    <wsdl:binding name="CARetriever" type="infw:CARetriever">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="caRetrieveInfo">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="ciRetrieveInfo">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="cpRetrieveInfo">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="fnRetrieveInfo">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CARetrieverService">
+        <wsdl:port name="CARetriever" binding="infw:CARetriever">
+            <soap:address location="https://www.ocse.gov/jit/services/CARetriever"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

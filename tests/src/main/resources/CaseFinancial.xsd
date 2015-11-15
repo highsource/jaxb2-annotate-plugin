@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Jim Hoover (Lockheed Martin) -->
+<xs:schema xmlns:fin="urn:us:gov:hhs:acf:fin" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cse="urn:us:gov:hhs:acf:cse" targetNamespace="urn:us:gov:hhs:acf:fin" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:us:gov:hhs:acf:cse" schemaLocation="cse.xsd"/>
+	<xs:element name="CaseFinancialRoot">
+		<xs:annotation>
+			<xs:documentation>The root element for financial information for a case.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FinancialTransaction" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>This complex component provides a logical grouping of elements related to financial data information.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Payment" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>This complex component provides a logical grouping of payment elements.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="fin:AppliedDate"/>
+										<xs:element ref="fin:AppliedAmount"/>
+										<xs:element name="PaymentSource" type="cse:PaymentSourceCodeType" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Disbursement" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>This complex component provides a logical grouping of disbursement elements.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="fin:AppliedDate"/>
+										<xs:element ref="fin:AppliedAmount"/>
+										<xs:element name="RecipientName" type="cse:RecipientNameType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Disbursement Recipient Name</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="InstrumentNumber" type="cse:InstrumentNumberType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Disbursement Instrument Number</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="MonthlyObligation" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>This complex component provides a logical grouping of elements summarizing the NCP's current financial support obligation.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ObligationSupportAmount" type="cse:ObligationSupportAmountType" minOccurs="0"/>
+							<xs:element name="ObligationArrearsAmount" type="cse:ObligationArrearsAmountType" minOccurs="0"/>
+							<xs:element name="ObligationOtherAmount" type="cse:ObligationOtherAmountType" minOccurs="0"/>
+							<xs:element name="ObligationTotalAmount" type="cse:ObligationTotalAmountType" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="AccountValues" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Ths complex component provides a logical grouping of elements summarizing the NCP's balances owed.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ArrearsBalanceAmount" type="cse:ArrearsBalanceAmountType" minOccurs="0"/>
+							<xs:element name="InterestOwedBalanceAmount" type="cse:InterestOwedBalanceAmountType" minOccurs="0"/>
+							<xs:element name="JudgementAmount" type="cse:JudgmentAmountType" minOccurs="0"/>
+							<xs:element name="NCPFeesBalanceAmount" type="cse:NCPFeesBalanceAmountType" minOccurs="0"/>
+							<xs:element name="AssignedArrearsBalanceAmount" type="cse:AssignedArrearsBalanceAmountType" minOccurs="0"/>
+							<xs:element name="TotalOwedBalanceAmount" type="cse:TotalOwedBalanceAmountType" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="LastPayment" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="fin:AppliedDate"/>
+							<xs:element ref="fin:AppliedAmount"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AppliedDate" type="cse:AppliedDateType">
+		<xs:annotation>
+			<xs:documentation>The date an event was applied to a case or account.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AppliedAmount">
+		<xs:annotation>
+			<xs:documentation>A money amount applied to a case or an account.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="cse:AppliedAmountType">
+				<xs:pattern value="\d{1,9}.\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  $RCSfile: CAAudit.wsdl,v $ 
+  Created: $Date: 2008/09/25 21:59:09 $
+        By: $Author: nkusumba $
+
+  Web-service description for the CAAudit service.
+  Receive CAAudit info.
+ -->
+
+<wsdl:definitions targetNamespace="http://www.ocse.gov/quick/wsdl/CAAudit.wsdl" 
+    xmlns:audw="http://www.ocse.gov/quick/wsdl/CAAudit.wsdl" 
+    xmlns:audx="http://www.ocse.gov/quick/wsdl/CAAudit.xsd" 
+    xmlns:qikrsp="urn:us:gov:hhs:acf:qikrsp" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    name="CAAudit"
+>
+  <!-- 
+      WSDL Types element defines the data type that are used by the web service.
+  -->
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.ocse.gov/quick/wsdl/CAAudit.xsd" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    >
+      <xsd:import namespace="urn:us:gov:hhs:acf:qikrsp" 
+                  schemaLocation="QuickResponse.xsd" />
+
+      <xsd:complexType name="NotifyCAAuditRequest" >
+        <xsd:sequence>
+          <xsd:element ref="qikrsp:QuickResponse" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="NotifyCAAuditResponse" >
+      </xsd:complexType>
+
+      <xsd:complexType name="CAAuditFault" >
+        <xsd:sequence>
+          <xsd:element name="info" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:element name="notifyCAAuditRequest"  type="audx:NotifyCAAuditRequest" />
+      <xsd:element name="notifyCAAuditResponse" type="audx:NotifyCAAuditResponse" />
+      <xsd:element name="CAauditFault"          type="audx:CAAuditFault" />
+
+      <xsd:element name="notifyCAAudit" >
+          <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="audx:notifyCAAuditRequest" />
+              </xsd:sequence>
+          </xsd:complexType>
+      </xsd:element>
+
+    </xsd:schema>
+  </wsdl:types>
+
+    <!--  
+        WSDL message element defines the data elements of an operation.
+    -->
+  <wsdl:message name="notifyCAAuditIn" >
+    <wsdl:part name="in" element="audx:notifyCAAudit" />
+  </wsdl:message>
+
+  <wsdl:message name="notifyCAAuditOut" >
+    <wsdl:part name="out" element="audx:notifyCAAuditResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="CAauditFault" >
+    <wsdl:part name="fault" element="audx:CAauditFault" />
+  </wsdl:message>
+
+    <!-- 
+	WSDL portType element describes a web service, the operations that can be performed, 
+        and the messages that are involved.
+    -->
+  <wsdl:portType name="CAAudit" >
+    <wsdl:operation name="notifyCAAudit" >
+       <wsdl:input message="audw:notifyCAAuditIn" />
+       <wsdl:output message="audw:notifyCAAuditOut" />
+       <wsdl:fault name="fault" message="audw:CAauditFault" />
+    </wsdl:operation>
+  </wsdl:portType>
+
+   <!-- 
+       WSDL Bindings element defines the message format and protocol details for each port.
+   -->
+  <wsdl:binding name="CAAudit" type="audw:CAAudit" >
+    <soap:binding style="document" 
+                  transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <wsdl:operation name="notifyCAAudit" >
+      <soap:operation soapAction="" />
+
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+
+       <wsdl:fault name="fault" >
+         <soap:fault name="fault" use="literal" />
+       </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+
+   <!-- 
+	The service element defines the ports supported by the Web service. 
+   -->
+  <wsdl:service name="CAAuditService" >
+    <wsdl:port name="CAAudit" binding="audw:CAAudit" >
+       <soap:address location="https://www.ocse.gov/quick/services/CAAudit" />
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
