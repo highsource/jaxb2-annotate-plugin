@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Jim Hoover (Lockheed Martin) -->
+<xs:schema xmlns:qikrsp="urn:us:gov:hhs:acf:qikrsp" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cse="urn:us:gov:hhs:acf:cse" xmlns:qikreq="urn:us:gov:hhs:acf:qikreq" targetNamespace="urn:us:gov:hhs:acf:qikrsp" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:us:gov:hhs:acf:cse" schemaLocation="cse.xsd"/>
+	<xs:import namespace="urn:us:gov:hhs:acf:qikreq" schemaLocation="QuickRequest.xsd"/>
+	<xs:element name="QuickResponse">
+		<xs:annotation>
+			<xs:documentation>The root element for the Quick Response schema.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="qikreq:QuickRequest"/>
+				<xs:element name="ResponseMessages">
+					<xs:annotation>
+						<xs:documentation>Response or reply messages returned from a request.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SystemCode" type="cse:SystemCodeType">
+								<xs:annotation>
+									<xs:documentation>Codes that describe the success or failure of request or response message.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="SystemCodeText" type="cse:SystemCodeTextType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Text description of a code that describes the success or failure of request or response message.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="DataAccessCode" type="cse:DataAccessCodeType">
+								<xs:annotation>
+									<xs:documentation>Codes that describe the success or failure of request or response for a specific set of data.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="DataAccessCodeText" type="cse:DataAccessCodeTextType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Text description of a code that describes the success or failure of request or respons for a specific set of data.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

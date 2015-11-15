@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Jim Hoover (Lockheed Martin) -->
+<xs:schema xmlns:ci="urn:us:gov:hhs:acf:ci" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cse="urn:us:gov:hhs:acf:cse" targetNamespace="urn:us:gov:hhs:acf:ci" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:us:gov:hhs:acf:cse" schemaLocation="cse.xsd"/>
+	<xs:element name="ContactInfoRoot">
+		<xs:annotation>
+			<xs:documentation>This schema contains elements for a Contact.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ContactTypeCode" type="cse:ContactTypeCodeType" minOccurs="0"/>
+				<xs:element name="ContactName" type="cse:ContactNameType" minOccurs="0"/>
+				<xs:element name="ContactOfficeName" type="cse:ContactOfficeNameType" minOccurs="0"/>
+				<xs:element name="ContactAddress" type="cse:QuickAddressType" minOccurs="0"/>
+				<xs:element name="ContactPhoneNumber" type="cse:ContactPhoneNumberType" minOccurs="0"/>
+				<xs:element name="ContactPhoneExtensionNumber" type="cse:ContactPhoneExtensionNumberType" minOccurs="0"/>
+				<xs:element name="ContactFaxNumber" type="cse:ContactFaxNumberType" minOccurs="0"/>
+				<xs:element name="ContactEmailAddressText" type="cse:ContactEmailAddressTextType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

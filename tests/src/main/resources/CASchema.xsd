@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Jim Hoover (Lockheed Martin) -->
+<xs:schema xmlns:ca="urn:us:gov:hhs:acf:ca" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:idy="urn:us:gov:hhs:acf:idy" xmlns:csact="urn:us:gov:hhs:acf:csact" targetNamespace="urn:us:gov:hhs:acf:ca" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:us:gov:hhs:acf:csact" schemaLocation="CaseActivity.xsd"/>
+	<xs:import namespace="urn:us:gov:hhs:acf:idy" schemaLocation="IdentifyingInfo.xsd"/>
+	<xs:element name="CAInfo">
+		<xs:annotation>
+			<xs:documentation>Root element for the schema Case Activity Statements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="idy:IdentifyingInfoRoot"/>
+				<xs:element ref="csact:CaseActivityRoot"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

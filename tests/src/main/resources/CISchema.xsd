@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Jim Hoover (Lockheed Martin) -->
+<xs:schema xmlns:cis="urn:us:gov:hhs:acf:cis" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:idy="urn:us:gov:hhs:acf:idy" xmlns:ci="urn:us:gov:hhs:acf:ci" targetNamespace="urn:us:gov:hhs:acf:cis" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:us:gov:hhs:acf:ci" schemaLocation="ContactInfo.xsd"/>
+	<xs:import namespace="urn:us:gov:hhs:acf:idy" schemaLocation="IdentifyingInfo.xsd"/>
+	<xs:element name="CIInfo">
+		<xs:annotation>
+			<xs:documentation>This is the root element for the Contact Information Schema</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="idy:IdentifyingInfoRoot"/>
+				<xs:element ref="ci:ContactInfoRoot"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

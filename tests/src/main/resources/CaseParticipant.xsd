@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Jim Hoover (Lockheed Martin) -->
+<xs:schema xmlns:cspt="urn:us:gov:hhs:acf:cspt" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cse="urn:us:gov:hhs:acf:cse" targetNamespace="urn:us:gov:hhs:acf:cspt" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:us:gov:hhs:acf:cse" schemaLocation="cse.xsd"/>
+	<xs:element name="CaseParticipantRoot">
+		<xs:annotation>
+			<xs:documentation>The root element for participants involved in a case.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="NCP" type="cse:CasePersonType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Child" type="cse:CaseChildPersonType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="CP" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CPPerson" type="cse:CasePersonType" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="Organization" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="OrganizationName" type="cse:OrganizationNameType"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

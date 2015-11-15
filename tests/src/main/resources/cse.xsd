@@ -1,0 +1,1462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Jim Hoover (Lockheed Martin) -->
+<xs:schema xmlns:cse="urn:us:gov:hhs:acf:cse" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:us:gov:hhs:acf:cse" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:annotation>
+        <xs:documentation>CSE Core Data Elements</xs:documentation>
+    </xs:annotation>
+    <xs:annotation>
+        <xs:documentation>CSE Simple Types</xs:documentation>
+    </xs:annotation>
+    <xs:annotation>
+        <xs:documentation>Version v1.0 Last Updated 02/20/08</xs:documentation>
+    </xs:annotation>
+    <xs:simpleType name="CaseIdType">
+        <xs:annotation>
+            <xs:documentation>A type that exists to enforce the representation of case id.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="15"/>
+            <xs:pattern value="(0[^\\*\p{Ll}]*)*[^\\*\p{Ll}0 ][^\\*\p{Ll}]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DateType">
+        <xs:annotation>
+            <xs:documentation>A type that exists to enforce a YYYY-MM-DD format.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MemberType">
+        <xs:annotation>
+            <xs:documentation>CP=Custodial Party; NC=Non Custodial Parent; CH=Child</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="2"/>
+            <xs:enumeration value="CP"/>
+            <xs:enumeration value="CH"/>
+            <xs:enumeration value="NC"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SSNType">
+        <xs:annotation>
+            <xs:documentation>Social Security Number</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+            <xs:pattern value="\d{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FEINType">
+        <xs:annotation>
+            <xs:documentation>Federal Employer Identification Number</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+            <xs:pattern value="\d{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TINType">
+        <xs:annotation>
+            <xs:documentation>Tax Identification Number</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ITINType">
+        <xs:annotation>
+            <xs:documentation>Individual Tax Identification Number</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="GeneratedIdentifierType">
+        <xs:annotation>
+            <xs:documentation>An identifier assigned when a SSN, FEIN, TIN is missing.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MoneyAmountType">
+        <xs:annotation>
+            <xs:documentation>A type that defines a money amount at the case level.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value=""/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MessageTextType">
+        <xs:annotation>
+            <xs:documentation>A type that defines a textual message for a message code.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="USStateNumericCodeType">
+        <xs:annotation>
+            <xs:documentation>A code list that enumerates states.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="01"/>
+            <xs:enumeration value="02"/>
+            <xs:enumeration value="04"/>
+            <xs:enumeration value="05"/>
+            <xs:enumeration value="06"/>
+            <xs:enumeration value="08"/>
+            <xs:enumeration value="09"/>
+            <xs:enumeration value="10"/>
+            <xs:enumeration value="11"/>
+            <xs:enumeration value="12"/>
+            <xs:enumeration value="13"/>
+            <xs:enumeration value="15"/>
+            <xs:enumeration value="16"/>
+            <xs:enumeration value="17"/>
+            <xs:enumeration value="18"/>
+            <xs:enumeration value="19"/>
+            <xs:enumeration value="20"/>
+            <xs:enumeration value="21"/>
+            <xs:enumeration value="22"/>
+            <xs:enumeration value="23"/>
+            <xs:enumeration value="24"/>
+            <xs:enumeration value="25"/>
+            <xs:enumeration value="26"/>
+            <xs:enumeration value="27"/>
+            <xs:enumeration value="28"/>
+            <xs:enumeration value="29"/>
+            <xs:enumeration value="30"/>
+            <xs:enumeration value="31"/>
+            <xs:enumeration value="32"/>
+            <xs:enumeration value="33"/>
+            <xs:enumeration value="34"/>
+            <xs:enumeration value="35"/>
+            <xs:enumeration value="36"/>
+            <xs:enumeration value="37"/>
+            <xs:enumeration value="38"/>
+            <xs:enumeration value="39"/>
+            <xs:enumeration value="40"/>
+            <xs:enumeration value="41"/>
+            <xs:enumeration value="42"/>
+            <xs:enumeration value="44"/>
+            <xs:enumeration value="45"/>
+            <xs:enumeration value="46"/>
+            <xs:enumeration value="47"/>
+            <xs:enumeration value="48"/>
+            <xs:enumeration value="49"/>
+            <xs:enumeration value="50"/>
+            <xs:enumeration value="51"/>
+            <xs:enumeration value="53"/>
+            <xs:enumeration value="54"/>
+            <xs:enumeration value="55"/>
+            <xs:enumeration value="56"/>
+            <xs:enumeration value="66"/>
+            <xs:enumeration value="72"/>
+            <xs:enumeration value="78"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="USStateCodeType">
+        <xs:annotation>
+            <xs:documentation>A code list that enumerates states.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AK"/>
+            <xs:enumeration value="AL"/>
+            <xs:enumeration value="AR"/>
+            <xs:enumeration value="AZ"/>
+            <xs:enumeration value="CA"/>
+            <xs:enumeration value="CO"/>
+            <xs:enumeration value="CT"/>
+            <xs:enumeration value="DC"/>
+            <xs:enumeration value="DE"/>
+            <xs:enumeration value="FL"/>
+            <xs:enumeration value="GA"/>
+            <xs:enumeration value="GU"/>
+            <xs:enumeration value="HI"/>
+            <xs:enumeration value="IA"/>
+            <xs:enumeration value="ID"/>
+            <xs:enumeration value="IL"/>
+            <xs:enumeration value="IN"/>
+            <xs:enumeration value="KS"/>
+            <xs:enumeration value="KY"/>
+            <xs:enumeration value="LA"/>
+            <xs:enumeration value="MA"/>
+            <xs:enumeration value="MD"/>
+            <xs:enumeration value="ME"/>
+            <xs:enumeration value="MI"/>
+            <xs:enumeration value="MN"/>
+            <xs:enumeration value="MO"/>
+            <xs:enumeration value="MS"/>
+            <xs:enumeration value="MT"/>
+            <xs:enumeration value="NC"/>
+            <xs:enumeration value="ND"/>
+            <xs:enumeration value="NE"/>
+            <xs:enumeration value="NH"/>
+            <xs:enumeration value="NJ"/>
+            <xs:enumeration value="NM"/>
+            <xs:enumeration value="NV"/>
+            <xs:enumeration value="NY"/>
+            <xs:enumeration value="OH"/>
+            <xs:enumeration value="OK"/>
+            <xs:enumeration value="OR"/>
+            <xs:enumeration value="PA"/>
+            <xs:enumeration value="PR"/>
+            <xs:enumeration value="RI"/>
+            <xs:enumeration value="SC"/>
+            <xs:enumeration value="SD"/>
+            <xs:enumeration value="TN"/>
+            <xs:enumeration value="TX"/>
+            <xs:enumeration value="UT"/>
+            <xs:enumeration value="VA"/>
+            <xs:enumeration value="VI"/>
+            <xs:enumeration value="VT"/>
+            <xs:enumeration value="WA"/>
+            <xs:enumeration value="WI"/>
+            <xs:enumeration value="WV"/>
+            <xs:enumeration value="WY"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PhoneNumberType">
+        <xs:annotation>
+            <xs:documentation>A type that defines a phone number with hyphens.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{3}-\d{3}-\d{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="YesNoType">
+        <xs:annotation>
+            <xs:documentation>A type that allows yes or no response.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value="N"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressStreetTextType">
+        <xs:annotation>
+            <xs:documentation>Details about a street.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="AddressCityNameType">
+        <xs:annotation>
+            <xs:documentation>A name of a city or town.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="AddressCountryCodeType">
+        <xs:annotation>
+            <xs:documentation>A code identifying a country.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressCountryNameType">
+        <xs:annotation>
+            <xs:documentation>A name of a country.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="AddressStateCodeType">
+        <xs:annotation>
+            <xs:documentation>A code identifying a state.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="2"/>
+            <xs:enumeration value="AK"/>
+            <xs:enumeration value="AL"/>
+            <xs:enumeration value="AR"/>
+            <xs:enumeration value="AZ"/>
+            <xs:enumeration value="CA"/>
+            <xs:enumeration value="CO"/>
+            <xs:enumeration value="CT"/>
+            <xs:enumeration value="DC"/>
+            <xs:enumeration value="DE"/>
+            <xs:enumeration value="FL"/>
+            <xs:enumeration value="GA"/>
+            <xs:enumeration value="GU"/>
+            <xs:enumeration value="HI"/>
+            <xs:enumeration value="IA"/>
+            <xs:enumeration value="ID"/>
+            <xs:enumeration value="IL"/>
+            <xs:enumeration value="IN"/>
+            <xs:enumeration value="KS"/>
+            <xs:enumeration value="KY"/>
+            <xs:enumeration value="LA"/>
+            <xs:enumeration value="MA"/>
+            <xs:enumeration value="MD"/>
+            <xs:enumeration value="ME"/>
+            <xs:enumeration value="MI"/>
+            <xs:enumeration value="MN"/>
+            <xs:enumeration value="MO"/>
+            <xs:enumeration value="MS"/>
+            <xs:enumeration value="MT"/>
+            <xs:enumeration value="NC"/>
+            <xs:enumeration value="ND"/>
+            <xs:enumeration value="NE"/>
+            <xs:enumeration value="NH"/>
+            <xs:enumeration value="NJ"/>
+            <xs:enumeration value="NM"/>
+            <xs:enumeration value="NV"/>
+            <xs:enumeration value="NY"/>
+            <xs:enumeration value="OH"/>
+            <xs:enumeration value="OK"/>
+            <xs:enumeration value="OR"/>
+            <xs:enumeration value="PA"/>
+            <xs:enumeration value="PR"/>
+            <xs:enumeration value="RI"/>
+            <xs:enumeration value="SC"/>
+            <xs:enumeration value="SD"/>
+            <xs:enumeration value="TN"/>
+            <xs:enumeration value="TX"/>
+            <xs:enumeration value="UT"/>
+            <xs:enumeration value="VA"/>
+            <xs:enumeration value="VI"/>
+            <xs:enumeration value="VT"/>
+            <xs:enumeration value="WA"/>
+            <xs:enumeration value="WI"/>
+            <xs:enumeration value="WV"/>
+            <xs:enumeration value="WY"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressPostalCodeType">
+        <xs:annotation>
+            <xs:documentation>A postal code that is not a US ZIP code.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressZIPCodeType">
+        <xs:annotation>
+            <xs:documentation>A US ZIP code.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="5"/>
+            <xs:pattern value="\d{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressZIPExtensionCodeType">
+        <xs:annotation>
+            <xs:documentation>An extension of a US ZIP code.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="\d{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ContactPhoneNumberType">
+        <xs:annotation>
+            <xs:documentation>Phone Number</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:pattern value="\d{3}-\d{3}-\d{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ContactFaxNumberType">
+        <xs:annotation>
+            <xs:documentation>A facsimile number for a person or organization.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:pattern value="\d{3}-\d{3}-\d{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ContactPhoneExtensionNumberType">
+        <xs:annotation>
+            <xs:documentation>A telephone suffix number to be entered to direct a call to the appropriate place.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:maxLength value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ContactEmailAddressTextType">
+        <xs:annotation>
+            <xs:documentation>An electronic e-mail address of a person or organization.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="48"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PersonSurNameType">
+        <xs:annotation>
+            <xs:documentation>A last name or family name of a person.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="PersonGivenNameType">
+        <xs:annotation>
+            <xs:documentation>A first name of a person.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="PersonSexCodeType">
+        <xs:annotation>
+            <xs:documentation>A code identifying the gender or sex of a person.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="F"/>
+            <xs:enumeration value="M"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PersonMiddleNameType">
+        <xs:annotation>
+            <xs:documentation>A middle name of a person.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="PersonBirthDateType">
+        <xs:annotation>
+            <xs:documentation>The date of a person's birth.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PersonSSNType">
+        <xs:annotation>
+            <xs:documentation>A person's social security number.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PersonNameMatchCodeType">
+        <xs:annotation>
+            <xs:documentation>A code used to indicate what component(s) of the name matched the request. Values used for
+                matching: 1 - Match to First, Middle, and Last Name sent; 2 - Match to 1st alternative name sent; 3 -
+                Match to 2nd alternative name sent; No name match for SSN; 5 - Information not available for SSN sent.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="PersonFamilyViolenceIndicatorType">
+        <xs:annotation>
+            <xs:documentation>A Y=Yes or N=No value that indicates whether famliy violence exists for a person
+                participating in a case.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value="N"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OrganizationAgencyCodeType">
+        <xs:annotation>
+            <xs:documentation>A code that identifies a Federal Agency.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="A03"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OrganizationNameType">
+        <xs:annotation>
+            <xs:documentation>The name of an organization.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="SystemUserIdentifierType">
+        <xs:annotation>
+            <xs:documentation>An identifier that associates a user with access or authorization to a system.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="SystemServerIdentifierType">
+        <xs:annotation>
+            <xs:documentation>An identifier that uniquely defines a Server Address within a network.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="StateTribeTerritoryNameType">
+        <xs:annotation>
+            <xs:documentation>The full name of a state, tribe or territory.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="EndDateType">
+        <xs:annotation>
+            <xs:documentation>The ending or finishing point in a date range.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StartDateType">
+        <xs:annotation>
+            <xs:documentation>The beginning or starting point in a date range.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AppliedDateType">
+        <xs:annotation>
+            <xs:documentation>The date an event was applied to a case or an account.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AppliedAmountType">
+        <xs:annotation>
+            <xs:documentation>A money amount applied to a case or an account.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PaymentLastIndicatorType">
+        <xs:annotation>
+            <xs:documentation>Last Payment Indicator - Valid values are Y or N. This indicator identifies the Last
+                Payment received for a case. There should be only one Y per payment group. This element maps to Last
+                Payment Date and Last Payment Amount.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value="N"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PaymentSourceCodeType">
+        <xs:annotation>
+            <xs:documentation>Payment Source Code - Valid Codes: FTO=IRS Tax Intercept; UBI=Unemployment Benefit
+                Insurance Intercept; WCI=Workers Compensation; STO=State Tax Intercept; AEI=Administrative Enforcement
+                for Interstate Cases; NDP=Received directly from NCP; NIW=Income Withholding; FAO=Administrative Offset;
+                IFC=IRS Collection; FID=Financial Institution Data Match Levy; PDC=Passport Denial Collection; OTH=Other
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="3"/>
+            <xs:enumeration value="FTO"/>
+            <xs:enumeration value="UBI"/>
+            <xs:enumeration value="WCI"/>
+            <xs:enumeration value="STO"/>
+            <xs:enumeration value="AEI"/>
+            <xs:enumeration value="NDP"/>
+            <xs:enumeration value="NIW"/>
+            <xs:enumeration value="FAO"/>
+            <xs:enumeration value="IFC"/>
+            <xs:enumeration value="FID"/>
+            <xs:enumeration value="PDC"/>
+            <xs:enumeration value="OTH"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RecipientTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Disbursement Recipient Type Code Valid Codes: P=Custodial Parent; T=TANF; F=FosterCare;
+                O=Other; S=State
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="P"/>
+            <xs:enumeration value="T"/>
+            <xs:enumeration value="F"/>
+            <xs:enumeration value="O"/>
+            <xs:enumeration value="S"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RecipientNameType">
+        <xs:annotation>
+            <xs:documentation>Disbursement Recipient Name</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="InstrumentNumberType">
+        <xs:annotation>
+            <xs:documentation>Disbursement Instrument Number</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RequestDateTimeType">
+        <xs:annotation>
+            <xs:documentation>The date/time that a request for information was made.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern
+                    value="\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))T(([0-1][0-9])|(2[0-4])):[0-5][0-9]:[0-5][0-9](\.\d{3})?"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RequestorIdentifierType">
+        <xs:annotation>
+            <xs:documentation>A unique identifier for a request. First 2 characters are a state number followed by 3
+                additional characters (suggest 000).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StateGeneratedIdentifierType">
+        <xs:annotation>
+            <xs:documentation>A unique identifier supplied by a state to associate a case query to a specific request.
+                (State could use a date/timestamp for this element).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ObligationSupportAmountType">
+        <xs:annotation>
+            <xs:documentation>Obligation Support Amount</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ObligationArrearsAmountType">
+        <xs:annotation>
+            <xs:documentation>Obligation Arrears Amount</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ObligationOtherAmountType">
+        <xs:annotation>
+            <xs:documentation>Obligation Other Amount</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ObligationTotalAmountType">
+        <xs:annotation>
+            <xs:documentation>Obligation Total Amount</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="InterestOwedBalanceAmountType">
+        <xs:annotation>
+            <xs:documentation>Interest Owed Balance</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NCPFeesBalanceAmountType">
+        <xs:annotation>
+            <xs:documentation>NCP Fees Balance</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AssignedArrearsBalanceAmountType">
+        <xs:annotation>
+            <xs:documentation>Assigned Arrears Balance</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="JudgmentAmountType">
+        <xs:annotation>
+            <xs:documentation>Judgement Amount</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ArrearsBalanceAmountType">
+        <xs:annotation>
+            <xs:documentation>Arrears Balance</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TotalOwedBalanceAmountType">
+        <xs:annotation>
+            <xs:documentation>Total Owed Balance</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="11"/>
+            <xs:fractionDigits value="2"/>
+            <xs:pattern value="\d{1,9}\.\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CaseStatusCodeType">
+        <xs:annotation>
+            <xs:documentation>A status of either O=Open or C=Closed for a case.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="O"/>
+            <xs:enumeration value="C"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CaseExtractedDateType">
+        <xs:annotation>
+            <xs:documentation>The date the information was extracted from the source system.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CaseIdentifierType">
+        <xs:annotation>
+            <xs:documentation>A value assigned by a state to uniquely identify each IV-D case in the state.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(0[^\\*\p{Ll}]*)*[^\\*\p{Ll}0 ][^\\*\p{Ll}]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OtherCaseIdentifierType">
+        <xs:annotation>
+            <xs:documentation>A value assigned by a state to uniquely identify each IV-D case in the state.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(0[^\\*\p{Ll}]*)*[^\\*\p{Ll}0 ][^\\*\p{Ll}]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CaseRequestedDataTextType">
+        <xs:annotation>
+            <xs:documentation>The type of data that is being requested. Examples include financial, activity, support
+                order.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="financial"/>
+            <xs:enumeration value="case activity"/>
+            <xs:enumeration value="case participants"/>
+            <xs:enumeration value="contact information"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="LocateSendDateType">
+        <xs:annotation>
+            <xs:documentation>A date a document (transmission) was sent.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="LocateCountType">
+        <xs:annotation>
+            <xs:documentation>A count of instances included in a document.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer"/>
+    </xs:simpleType>
+    <xs:simpleType name="ControlPassBackTextType">
+        <xs:annotation>
+            <xs:documentation>Used as a control data for tracking a response.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EmployerFEINIdentifierType">
+        <xs:annotation>
+            <xs:documentation>Federal Employer Identification Number</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="cse:FEINType"/>
+    </xs:simpleType>
+    <xs:simpleType name="EmployeeInsuranceBenefitCodeType">
+        <xs:annotation>
+            <xs:documentation>A code that identifies insurance coverage. Valid values are: F - Family coverage; I -
+                Individual coverage; N - Information not available
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="F"/>
+            <xs:enumeration value="I"/>
+            <xs:enumeration value="N"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EmployeeHireDateType">
+        <xs:annotation>
+            <xs:documentation>Date an employee was hired.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EmployeeAnnualSalaryAmountType">
+        <xs:annotation>
+            <xs:documentation>The annual salary for an employee in whole dollars.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PersonIncarceratedIndicatorType">
+        <xs:annotation>
+            <xs:documentation>True (yes) if the person is under mandatory confined supervision.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="preserve"/>
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value=" "/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SurveyQuestionNumberType">
+        <xs:annotation>
+            <xs:documentation>The question number contained in a survey.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="SurveyAnswerTextType">
+        <xs:annotation>
+            <xs:documentation>The answer to a survey question.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="SurveyNameType">
+        <xs:annotation>
+            <xs:documentation>The name of a survey being submitted.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="SurveyDateType">
+        <xs:annotation>
+            <xs:documentation>The date a survey was taken.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CaseActivityDateType">
+        <xs:annotation>
+            <xs:documentation>A point in time stated in terms of the day, month and year of an action or an event that
+                took place on a case.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>Indicates the type of address supplied.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Mailing"/>
+            <xs:enumeration value="Residential"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PersonIncarcerationDateType">
+        <xs:annotation>
+            <xs:documentation>The date a person, typically NCP, was placed under mandatory control.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="YesIndicatorType">
+        <xs:annotation>
+            <xs:documentation>Indicates a True (yes) condition.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="preserve"/>
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value=" "/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PersonIncarcerationReleasedDateType">
+        <xs:annotation>
+            <xs:documentation>The date a person, typically NCP was or is expected to be released under mandatory
+                control.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PersonDiedIndicatorType">
+        <xs:annotation>
+            <xs:documentation>True (yes) if the person died or was declared legally dead.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="preserve"/>
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value=" "/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CaseActivityEffectiveDateType">
+        <xs:annotation>
+            <xs:documentation>A point in time stated in terms of the day, month and year of an action or an event that
+                is to be in effect for case.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EmployerNameType">
+        <xs:annotation>
+            <xs:documentation>The name of an organization or a person who employs people.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="EnforcementNAIndicatorType">
+        <xs:annotation>
+            <xs:documentation>True if the enforcement not available in a state.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="preserve"/>
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value=" "/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ContactTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>A value that represents a party that may be contacted for the purposes of child support
+                case processing.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Caseworker"/>
+            <xs:enumeration value="Employer"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ContactNameType">
+        <xs:annotation>
+            <xs:documentation>The full name of a person.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="FinancialInstitutionNameType">
+        <xs:annotation>
+            <xs:documentation>The name of a state or national bank, savings and loan association, mutual savings bank or
+                credit union.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ContactOfficeNameType">
+        <xs:annotation>
+            <xs:documentation>The name of an office</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="SystemCodeType">
+        <xs:annotation>
+            <xs:documentation>Codes that describe the success or failure of request or response message.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="SystemCodeTextType">
+        <xs:annotation>
+            <xs:documentation>Text description of a code that describes the success or failure of request or response
+                message.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="cse:MessageTextType"/>
+    </xs:simpleType>
+    <xs:simpleType name="DataAccessCodeType">
+        <xs:annotation>
+            <xs:documentation>Codes that describe the success or failure of request or response message for a specific
+                set of data.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="DataAccessCodeTextType">
+        <xs:annotation>
+            <xs:documentation>Text description of a code that describes the success or failure of request or response
+                message for a specific set of data.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="cse:MessageTextType"/>
+    </xs:simpleType>
+    <xs:simpleType name="WedlockBirthCodeType">
+        <xs:annotation>
+            <xs:documentation>A code defining whether a child at birth was born out of wedlock or in wedlock.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="out"/>
+            <xs:enumeration value="in"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CaseActivityStatementType">
+        <xs:annotation>
+            <xs:documentation>An event or activity that occurred on a case.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="InterstateCaseRoleCodeType">
+        <xs:annotation>
+            <xs:documentation>A code defining either an initiating or responding role in an interstate case.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="I"/>
+            <xs:enumeration value="R"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ClosureReasonType">
+        <xs:annotation>
+            <xs:documentation>A reason indicating why a case was closed.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="DriverLicenseNumberType">
+        <xs:annotation>
+            <xs:documentation>The identificaton number for a Driver's License.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SSNVerificationCodeType">
+        <xs:annotation>
+            <xs:documentation>The code indicates whether a SSN/name combination is verified or the result of a name
+                match comparison which could result in a probable match.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:length value="1"/>
+            <xs:enumeration value="V"/>
+            <xs:enumeration value="M"/>
+            <xs:enumeration value="U"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressScrubCodeType">
+        <xs:annotation>
+            <xs:documentation>A code defining the results of an address validation.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="preserve"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ClaimNumberType">
+        <xs:annotation>
+            <xs:documentation>A unique number assigned by an insurer to identify a claim.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ClaimTypeCodeType">
+        <xs:annotation>
+            <xs:documentation>A code indicating the type of an insurance claim.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:length value="2"/>
+            <xs:enumeration value="00"/>
+            <xs:enumeration value="01"/>
+            <xs:enumeration value="02"/>
+            <xs:enumeration value="03"/>
+            <xs:enumeration value="04"/>
+            <xs:enumeration value="05"/>
+            <xs:enumeration value="06"/>
+            <xs:enumeration value="07"/>
+            <xs:enumeration value="08"/>
+            <xs:enumeration value="09"/>
+            <xs:enumeration value="10"/>
+            <xs:enumeration value="11"/>
+            <xs:enumeration value="12"/>
+            <xs:enumeration value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ClaimStatusCodeType">
+        <xs:annotation>
+            <xs:documentation>A code which indicates the status of a claim at the time of a match.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:length value="1"/>
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ClaimPayoutFrequencyCodeType">
+        <xs:annotation>
+            <xs:documentation>The frequency of the payout to the claimant.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:length value="1"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="5"/>
+            <xs:enumeration value="6"/>
+            <xs:enumeration value="7"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ObligorMatchCodeType">
+        <xs:annotation>
+            <xs:documentation>A code that indicates the result of a match performed by the Insurer.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:length value="2"/>
+            <xs:enumeration value="00"/>
+            <xs:enumeration value="01"/>
+            <xs:enumeration value="02"/>
+            <xs:enumeration value="03"/>
+            <xs:enumeration value="04"/>
+            <xs:enumeration value="05"/>
+            <xs:enumeration value="06"/>
+            <xs:enumeration value="07"/>
+            <xs:enumeration value="08"/>
+            <xs:enumeration value="09"/>
+            <xs:enumeration value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OccupationTextType">
+        <xs:annotation>
+            <xs:documentation>A person's occupation.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="40"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProfessionalLicenseNumberType">
+        <xs:annotation>
+            <xs:documentation>A unique number used to identify a Professional License.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ClaimUpdateIndicatorType">
+        <xs:annotation>
+            <xs:documentation>An indicator which identifies if the claim has been updated by the Insurer since it was
+                last received.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="preserve"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value=" "/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ServiceOperationCodeType">
+        <xs:annotation>
+            <xs:documentation>A list of operations that a user can request information about.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="State Status"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:annotation>
+        <xs:documentation>CSE Complex Types</xs:documentation>
+    </xs:annotation>
+    <xs:complexType name="AddressType">
+        <xs:annotation>
+            <xs:documentation>A structure that describes a postal location to which paper mail can be directed.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="AddressTypeCode" type="cse:AddressTypeCodeType" minOccurs="0"/>
+            <xs:element name="AddressStreetText" type="cse:AddressStreetTextType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="AddressCityName" type="cse:AddressCityNameType" minOccurs="0"/>
+            <xs:element name="AddressStateCode" type="cse:AddressStateCodeType" minOccurs="0"/>
+            <xs:element name="AddressZIPCode" type="cse:AddressZIPCodeType" minOccurs="0"/>
+            <xs:element name="AddressZIPExtensionCode" type="cse:AddressZIPExtensionCodeType" minOccurs="0"/>
+            <xs:element name="AddressPostalCode" type="cse:AddressPostalCodeType" minOccurs="0"/>
+            <xs:element name="AddressCountryCode" type="cse:AddressCountryCodeType" minOccurs="0"/>
+            <xs:element name="AddressCountryName" type="cse:AddressCountryNameType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="QuickAddressType">
+        <xs:annotation>
+            <xs:documentation>Elements associated to providing an address.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="AddressStreetText" type="cse:AddressStreetTextType" minOccurs="0" maxOccurs="2"/>
+            <xs:element name="AddressCityName" type="cse:AddressCityNameType"/>
+            <xs:element name="AddressZone">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="Domestic">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="AddressStateCode" type="cse:AddressStateCodeType"/>
+                                    <xs:element name="AddressZIPCode" type="cse:AddressZIPCodeType" minOccurs="0"/>
+                                    <xs:element name="AddressZIPExtensionCode" type="cse:AddressZIPExtensionCodeType"
+                                                minOccurs="0"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Foreign">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="AddressCountryName" type="cse:AddressCountryNameType"/>
+                                    <xs:element name="AddressPostalCode" type="cse:AddressPostalCodeType"
+                                                minOccurs="0"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CaseIdentifyingInfoType">
+        <xs:annotation>
+            <xs:documentation>This complex component provides a logical grouping of elements related to a case.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="CaseExtractedDate" type="cse:CaseExtractedDateType">
+                <xs:annotation>
+                    <xs:documentation>The date the information was extracted from the source system.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CaseStatusCode" type="cse:CaseStatusCodeType">
+                <xs:annotation>
+                    <xs:documentation>A status of either O=Open or C=Closed for a case.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CaseRequestedDataText" type="cse:CaseRequestedDataTextType">
+                <xs:annotation>
+                    <xs:documentation>The type of data that is being requested. Examples include financial, activity,
+                        support order.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Providing" type="cse:ProvidingCaseType">
+                <xs:annotation>
+                    <xs:documentation>The State Tribe Territory providing case information for a specific case
+                        request.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Requesting" type="cse:RequestingCaseType">
+                <xs:annotation>
+                    <xs:documentation>The State Tribe Territory issuing a request for case information.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CasePersonType">
+        <xs:annotation>
+            <xs:documentation>A group that contains a person's name, birth date, SSN, and family violence indication.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="cse:PersonType">
+                <xs:sequence>
+                    <xs:element name="PersonFamilyViolenceIndicator" type="cse:PersonFamilyViolenceIndicatorType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="CaseChildPersonType">
+        <xs:annotation>
+            <xs:documentation>A group that contains a child's name, SSN, DOB, Family Violence indication and whether the
+                birth was in or out of wedlock.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="cse:CasePersonType">
+                <xs:sequence>
+                    <xs:element name="WedlockBirthCode" type="cse:WedlockBirthCodeType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DateRangeType">
+        <xs:annotation>
+            <xs:documentation>A starting and ending dates that cover a period of time.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="StartDate" type="cse:StartDateType">
+                <xs:annotation>
+                    <xs:documentation>The beginning or starting point in a date range.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EndDate" type="cse:EndDateType">
+                <xs:annotation>
+                    <xs:documentation>The ending or finishing point in a data range.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PersonType">
+        <xs:annotation>
+            <xs:documentation>A group that contains a person's name, birth date and SSN.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="PersonName" type="cse:PersonNameType" minOccurs="0"/>
+            <xs:element name="PersonBirthDate" type="cse:DateType" minOccurs="0"/>
+            <xs:element name="PersonSSN" type="cse:SSNType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PersonNameType">
+        <xs:annotation>
+            <xs:documentation>Person Name (Last, First, Middle)</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="PersonSurName" type="cse:PersonSurNameType"/>
+            <xs:element name="PersonGivenName" type="cse:PersonGivenNameType" minOccurs="0"/>
+            <xs:element name="PersonMiddleName" type="cse:PersonMiddleNameType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RequestedInfoType">
+        <xs:annotation>
+            <xs:documentation>This complex component provides a logical grouping of elements related to a specific
+                request for case information.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Providing" type="cse:ProvidingCaseType">
+                <xs:annotation>
+                    <xs:documentation>This group contains case identifying information from a providing state.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Requesting" type="cse:RequestingCaseType">
+                <xs:annotation>
+                    <xs:documentation>This group contains requesting case identifying information.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DateRange" type="cse:DateRangeType">
+                <xs:annotation>
+                    <xs:documentation>This group contains the starting and ending point for the period of time a request
+                        is being made for specific data.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RequestIdentifierType">
+        <xs:annotation>
+            <xs:documentation>A unique number created by a state to identify a specific request.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="RequestorIdentifier" type="cse:RequestorIdentifierType">
+                <xs:annotation>
+                    <xs:documentation>A unique identifier for a request. First 2 characters are a state number followed
+                        by 3 additional characters (suggest 000).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="StateGeneratedIdentifier" type="cse:StateGeneratedIdentifierType">
+                <xs:annotation>
+                    <xs:documentation>A unique identifier supplied by a state to associate a case query to a specific
+                        request. (State could use a date/timestamp for this element.)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RequestingCaseType">
+        <xs:annotation>
+            <xs:documentation>A type that contains elements to request a case.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="StateTribeTerritoryName" type="cse:StateTribeTerritoryNameType">
+                <xs:annotation>
+                    <xs:documentation>The full name of a state, tribe or territory.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CaseIdentifier" type="cse:CaseIdType">
+                <xs:annotation>
+                    <xs:documentation>A value assigned by a state to uniquely identify each IV-D case in the state.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OtherCaseIdentifier" type="cse:CaseIdType">
+                <xs:annotation>
+                    <xs:documentation>A value assigned by a state to uniquely identify each IV-D case in the state. This
+                        is the case identifier for another state's case.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProvidingCaseType">
+        <xs:annotation>
+            <xs:documentation>A type that contains elements to provide a case.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="StateTribeTerritoryName" type="cse:StateTribeTerritoryNameType">
+                <xs:annotation>
+                    <xs:documentation>The full name of a state, tribe or territory.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OtherCaseIdentifier" type="cse:CaseIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>A value assigned by a state to uniquely identify each IV-D case in the state. This
+                        is the case identifier for another state's case.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="InterstateRoleType">
+        <xs:annotation>
+            <xs:documentation>The role that a state plays in the development of a case.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="OtherStateTribeTerritoryName" type="cse:StateTribeTerritoryNameType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>The full name of a state, tribe or territory.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="InterstateCaseRoleCode" type="cse:InterstateCaseRoleCodeType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>A code defining either an initiating or responding role in an interstate case.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DriverLicenseType">
+        <xs:annotation>
+            <xs:documentation>A complex type that contains the license number and the state code where the license is
+                registered.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="DriverLicenseNumber" type="cse:DriverLicenseNumberType" minOccurs="0"/>
+            <xs:element name="DriverLicenseStateCode" type="cse:USStateCodeType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
