@@ -134,10 +134,6 @@ Note that annotations are first compiled in the `annotations` module and the add
 				<groupId>org.jvnet.jaxb2_commons</groupId>
 				<artifactId>jaxb2-basics-annotate</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.jvnet.jaxb2_commons</groupId>
-				<artifactId>jaxb2-annotate-plugin-test-annox-annotations</artifactId>
-			</plugin>
 		</plugins>
 	</configuration>
 </plugin>
