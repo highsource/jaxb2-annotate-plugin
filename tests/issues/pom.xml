@@ -38,7 +38,7 @@
 		<version>1.0.3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>jaxb2-annotate-plugin-issues</artifactId>
+	<artifactId>jaxb2-annotate-plugin-test-issues</artifactId>
 	<packaging>jar</packaging>
 	<name>JAXB2 Annotate Plugin - Test [issues]</name>
 	<properties>
@@ -56,8 +56,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jvnet.jaxb2_commons</groupId>
-			<artifactId>jaxb2-annotate-plugin-test-annox-annotations</artifactId>
-			<version>${jaxb2-annotate-plugin-test-annox-annotations.version}</version>
+			<artifactId>jaxb2-annotate-plugin-test-annotations</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -85,8 +85,7 @@
 						</plugin>
 						<plugin>
 							<groupId>org.jvnet.jaxb2_commons</groupId>
-							<artifactId>jaxb2-annotate-plugin-test-annox-annotations</artifactId>
-							<version>${jaxb2-annotate-plugin-test-annox-annotations.version}</version>
+							<artifactId>jaxb2-annotate-plugin-test-annotations</artifactId>
 						</plugin>
 					</plugins>
 				</configuration>
