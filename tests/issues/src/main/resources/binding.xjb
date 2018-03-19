@@ -44,7 +44,7 @@
 		</jaxb:bindings>
 
 		<jaxb:bindings node="xsd:complexType[@name='gh16Type']/xsd:sequence/xsd:element[@name='x']">
-			<!--jaxb:class ref="org.jvnet.jaxb2_commons.tests.issues.Gh16Type" /-->
+			<jaxb:class ref="org.jvnet.jaxb2_commons.tests.issues.Gh16Type" />
 		</jaxb:bindings>
 		<jaxb:bindings node="xsd:complexType[@name='gh16Type']/xsd:sequence/xsd:element[@name='x']">
 			<annox:annotate target="field">

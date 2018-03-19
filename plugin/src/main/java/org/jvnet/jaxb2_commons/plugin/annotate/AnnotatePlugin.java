@@ -49,9 +49,20 @@ import org.xml.sax.SAXParseException;
 import com.sun.codemodel.JAnnotatable;
 import com.sun.codemodel.JCodeModel;
 import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.model.CAttributePropertyInfo;
+import com.sun.tools.xjc.model.CClassRef;
 import com.sun.tools.xjc.model.CCustomizations;
 import com.sun.tools.xjc.model.CElementInfo;
+import com.sun.tools.xjc.model.CElementPropertyInfo;
+import com.sun.tools.xjc.model.CNonElement;
 import com.sun.tools.xjc.model.CPluginCustomization;
+import com.sun.tools.xjc.model.CPropertyInfo;
+import com.sun.tools.xjc.model.CPropertyVisitor;
+import com.sun.tools.xjc.model.CReferencePropertyInfo;
+import com.sun.tools.xjc.model.CTypeInfo;
+import com.sun.tools.xjc.model.CTypeRef;
+import com.sun.tools.xjc.model.CValuePropertyInfo;
+import com.sun.tools.xjc.model.Model;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.ElementOutline;
 import com.sun.tools.xjc.outline.EnumConstantOutline;
@@ -154,6 +165,7 @@ public class AnnotatePlugin extends AbstractParameterizablePlugin {
 		for (final EnumOutline enumOutline : outline.getEnums()) {
 			processEnumOutline(enumOutline, options, errorHandler);
 		}
+		Model model = outline.getModel();
 		return true;
 	}
 
@@ -204,6 +216,59 @@ public class AnnotatePlugin extends AbstractParameterizablePlugin {
 				.getCustomizations(fieldOutline);
 		annotate(fieldOutline.parent().ref.owner(), fieldOutline,
 				customizations, errorHandler);
+		markAnnotateCustomizationsAsAcknowledged(fieldOutline);
+	}
+	
+	private void markAnnotateCustomizationsAsAcknowledged(FieldOutline fieldOutline) {
+		CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
+		
+		propertyInfo.accept(new CPropertyVisitor<Void>() {
+
+			@Override
+			public Void onElement(CElementPropertyInfo p) {
+				for (CTypeRef typeRef : p.getTypes()) {
+					markAnnotateCustomizationsAsAcknowledged(typeRef.getTarget());
+				}
+				return null;
+			}
+
+			@Override
+			public Void onAttribute(CAttributePropertyInfo p) {
+				markAnnotateCustomizationsAsAcknowledged(p.getTarget());
+				return null;
+			}
+
+			@Override
+			public Void onReference(CReferencePropertyInfo p) {
+				for (CTypeInfo typeInfo:p.ref()) {
+					markAnnotateCustomizationsAsAcknowledged(typeInfo);
+				}
+				return null;
+			}
+
+			@Override
+			public Void onValue(CValuePropertyInfo p) {
+				markAnnotateCustomizationsAsAcknowledged(p.getTarget());
+				return null;
+			}
+		});
+	}
+
+	private void markAnnotateCustomizationsAsAcknowledged(CTypeInfo type) {
+		if (type instanceof CClassRef) {
+			CClassRef classRef = (CClassRef) type;
+			CCustomizations customizations = classRef.getCustomizations();
+			markAnnotateCustomizationsAsAcknowledged(customizations);
+		}
+	}
+	
+	private void markAnnotateCustomizationsAsAcknowledged(CCustomizations customizations) {
+		for (final CPluginCustomization cp : customizations) {
+			final Element element = cp.element;
+			if (Constants.NAMESPACE_URI.equals(element.getNamespaceURI())) {
+				cp.markAsAcknowledged();
+			}
+		}
 	}
 
 	protected void processEnumConstantOutline(EnumOutline enumOutline,
