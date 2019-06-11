@@ -364,9 +364,6 @@ public class RemoveAnnotationPlugin extends AbstractParameterizablePlugin {
 			}
 		}
 		else {
-			if (annotatable.annotations() == null || annotatable.annotations().isEmpty()) {
-				return;
-			}
 			JClass annotationClass = codeModel.ref(aClass);
 			
 			JAnnotationUse annotationUse = null;
