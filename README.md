@@ -5,6 +5,12 @@ jaxb2-annotate-plugin
 
 JAXB2 Annotate Plugin is capable of adding or removing arbitrary annotations to/from the generated sources.
 
+IMPORTANT NOTE
+--------------
+
+This repository has been merged in [jaxb-tools](https://github.com/highsource/jaxb-tools) repository along maven-jaxb2-plugin.  
+Users are encouraged to read the [migration guide](https://github.com/highsource/jaxb-tools/wiki/JAXB-Tools-Migration-Guide) to get the latest version of the plugin according their JAXB version
+
 Usage overview
 --------------
 
@@ -17,7 +23,7 @@ Providing annotations
 ---------------------
 
 You can annotate your schema-derived elements using normal Java annotation syntax.
-([Old XML syntax](http://confluence.highsource.org/display/J2B/Annotate+Plugin) is still supported but no longer recommended.)
+([Old XML syntax](https://github.com/highsource/jaxb-tools/wiki/JAXB-Annotate-Home) is still supported but no longer recommended.)
 
 **Current limitations:**
 * Annotation classes must be known in compile time. I.e. annotation classes must be made available in the XJC classpath.
