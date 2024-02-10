@@ -33,11 +33,19 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.namespace.QName;
 
+import com.sun.codemodel.JAnnotatable;
+import com.sun.codemodel.JAnnotationUse;
+import com.sun.codemodel.JClass;
+import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JFieldVar;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tools.ant.util.CollectionUtils;
 import org.jvnet.annox.Constants;
 import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
 import org.jvnet.jaxb2_commons.plugin.AnnotationTarget;
@@ -47,10 +55,6 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-import com.sun.codemodel.JAnnotatable;
-import com.sun.codemodel.JAnnotationUse;
-import com.sun.codemodel.JClass;
-import com.sun.codemodel.JCodeModel;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.CCustomizations;
 import com.sun.tools.xjc.model.CElementInfo;
@@ -194,6 +198,14 @@ public class RemoveAnnotationPlugin extends AbstractParameterizablePlugin {
 		for (final FieldOutline fieldOutline : classOutline.getDeclaredFields()) {
 			processFieldOutline(classOutline, fieldOutline, options,
 					errorHandler);
+
+		}
+
+		if (classOutline.getImplClass() != null) {
+			for (final Map.Entry<String, JFieldVar> entry : classOutline.getImplClass().fields().entrySet()) {
+				processFieldImplOutline(classOutline, entry.getValue(), options,
+						errorHandler);
+			}
 		}
 
 	}
@@ -205,6 +217,18 @@ public class RemoveAnnotationPlugin extends AbstractParameterizablePlugin {
 				.getCustomizations(fieldOutline);
 		removeAnnotationFromFieldOutline(fieldOutline.parent().ref.owner(), fieldOutline,
 				customizations, errorHandler);
+	}
+
+	protected void processFieldImplOutline(ClassOutline classOutline,
+										JFieldVar fieldOutlineImpl, Options options,
+									   ErrorHandler errorHandler) {
+
+		if(ArrayUtils.isNotEmpty(classOutline.getDeclaredFields())){
+			final CCustomizations customizations = CustomizationUtils
+					.getCustomizations(classOutline.getDeclaredFields()[0]);
+			removeAnnotationFromFieldImplOutline(classOutline.ref.owner(), fieldOutlineImpl,
+					customizations, errorHandler);
+		}
 	}
 
 	protected void processEnumConstantOutline(EnumOutline enumOutline,
@@ -311,6 +335,10 @@ public class RemoveAnnotationPlugin extends AbstractParameterizablePlugin {
 							.getAnnotatable(classOutline.parent(), classOutline);
 					removeAnnotation(codeModel, errorHandler, customization, element,
 							annotatable);
+					if (classOutline.getImplClass() != null) {
+						removeAnnotation(codeModel, errorHandler, customization, element,
+								classOutline.getImplClass());
+					}
 				} catch (IllegalArgumentException iaex) {
 					logger.error("Error applying the annotation.", iaex);
 				}
@@ -345,7 +373,30 @@ public class RemoveAnnotationPlugin extends AbstractParameterizablePlugin {
 			}
 		}
 	}
+	protected void removeAnnotationFromFieldImplOutline(final JCodeModel codeModel,
+													final JFieldVar fieldOutline,
+													final CCustomizations customizations, ErrorHandler errorHandler) {
+		for (final CPluginCustomization customization : customizations) {
+			final Element element = customization.element;
+			final QName name = new QName(element.getNamespaceURI(),
+					element.getLocalName());
+			if (isCustomizationElementName(name)) {
+				customization.markAsAcknowledged();
 
+				final AnnotationTarget annotationTarget = AnnotationTarget
+						.getAnnotationTarget(element, AnnotationTarget
+								.getAnnotationTarget(getDefaultFieldTarget()));
+
+				try {
+					removeAnnotation(codeModel, errorHandler, customization, element,
+							fieldOutline);
+				} catch (IllegalArgumentException iaex) {
+					logger.error("Error removing the annotation.", iaex);
+				}
+
+			}
+		}
+	}
 	private void removeAnnotation(final JCodeModel codeModel,
 			ErrorHandler errorHandler,
 			final CPluginCustomization customization,
